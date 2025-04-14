@@ -5,6 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from langgraph.graph import END, Graph, StateGraph
 from dotenv import load_dotenv
+import streamlit as st
 
 # Add the parent directory to sys.path to import from other modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -31,8 +32,6 @@ def query_mental_models(query_text: str, match_threshold: float = 0., match_coun
             "match_count": match_count
         }
     ).execute()
-
-    print(response.data)
     
     return response.data
 
@@ -42,7 +41,8 @@ def create_chat_graph():
     
     llm = ChatOpenAI(
         model_name="gpt-4-turbo",
-        temperature=0.5
+        temperature=0.5,
+        api_key=st.secrets["OPENAI_API_KEY"],
     )
     
     # Define the state schema
