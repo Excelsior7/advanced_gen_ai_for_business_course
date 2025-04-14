@@ -1,0 +1,5 @@
+.venv/*
+.cursor/*
+.env
+vector_store_creation/supabase/password.txt
+**/__pycache__/*
